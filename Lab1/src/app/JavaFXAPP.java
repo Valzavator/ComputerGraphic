@@ -38,6 +38,7 @@ public class JavaFXAPP extends Application {
     private static final int HEIGHT = 360;
 
     private final ArrayList<Snowflake> snowflakes = new ArrayList<>();
+    private boolean playSpecEff = true;
 
     @Override
     public void start(Stage primaryStage) {
@@ -112,7 +113,9 @@ public class JavaFXAPP extends Application {
         });
 
         timeline.getKeyFrames().addAll(light, snow);
-        timeline.play();
+
+        if (playSpecEff)
+            timeline.play();
 
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
