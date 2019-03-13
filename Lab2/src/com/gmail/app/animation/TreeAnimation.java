@@ -10,8 +10,9 @@ public class TreeAnimation extends JPanel implements ActionListener {
     private int maxHeight;
 
     private double angle = 0;
+    private double angleDelta = 0.01;
     private double scale = 1;
-    private double delta = 0.01;
+    private double scaleDelta = 0.01;
 
     private Timer timer;
     private final static int DELAY_DIFFERENCE = 10;
@@ -21,13 +22,24 @@ public class TreeAnimation extends JPanel implements ActionListener {
         timer = new Timer(10, this);
         timer.start();
         addMouseWheelListener(e -> {
-                    if (e.getWheelRotation() > 0) {
-                        increaseTimerDelay();
-                    } else {
-                        reduceTimerDelay();
+                    if (e.getWheelRotation() > 0 && angleDelta > 0.01) {
+                        angleDelta -= 0.01;
+
+                    } else if (e.getWheelRotation() < 0 && angleDelta < 0.1) {
+                        angleDelta += 0.01;
                     }
                 }
         );
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e) && Math.abs(scaleDelta) > 0.001) {
+                    scaleDelta = Math.signum(scaleDelta) * (Math.abs(scaleDelta) - 0.001);
+                } else if (SwingUtilities.isLeftMouseButton(e) && Math.abs(scaleDelta) < 0.01) {
+                    scaleDelta = Math.signum(scaleDelta) * (Math.abs(scaleDelta) + 0.001);
+                }
+            }
+        });
     }
 
     public void paint(Graphics g) {
@@ -57,29 +69,29 @@ public class TreeAnimation extends JPanel implements ActionListener {
                 maxHeight - 2 * BORDER_OFFSET
         );
 
-        g2d.drawLine(0, 0, 0, 0);
-
-        double[][] coverOfTreePoints = {
-                {0, 8.0},
-                {63, 94.0},
-                {39, 94.0},
-                {81, 161.0},
-                {47, 161.0},
-                {86, 220.0},
-                {-57, 220.0},
-                {-20, 161.0},
-                {-51, 161.0},
-                {-18, 86.0},
-                {-41, 86.0}
+        double[][] starPoints = {
+                {-30, -20}, {-10, -23}, {0, -50}, {10, -23},
+                {30, -20}, {15, -10}, {18, 13}, {0, 0},
+                {-18, 13}, {-15, -10}, {-30, -20}
         };
 
-        GeneralPath coverOfTree = new GeneralPath();
-        coverOfTree.moveTo(coverOfTreePoints[0][0], coverOfTreePoints[0][1]);
-        for (int k = 1; k < coverOfTreePoints.length; k++) {
-            coverOfTree.lineTo(coverOfTreePoints[k][0], coverOfTreePoints[k][1]);
-        }
+        GeneralPath star = drawPathByPoints(starPoints);
 
-        coverOfTree.closePath();
+        double[][] coverOfTreePoints = {
+                {0, 0},
+                {63, 86},
+                {39, 86},
+                {81, 153},
+                {47, 153},
+                {86, 212},
+                {-57, 212},
+                {-20, 153},
+                {-51, 153},
+                {-18, 78},
+                {-41, 78}
+        };
+
+        GeneralPath coverOfTree = drawPathByPoints(coverOfTreePoints);
 
         g2d.rotate(angle);
         g2d.scale(scale, scale);
@@ -87,8 +99,11 @@ public class TreeAnimation extends JPanel implements ActionListener {
         g2d.setColor(new Color(0, 128, 0));
         g2d.fill(coverOfTree);
 
+        g2d.setColor(new Color(255, 100, 14));
+        g2d.fill(star);
+
         g2d.setColor(new Color(128, 64, 0));
-        g2d.fillRect(-9, 220, 40, 100);
+        g2d.fillRect(-9, 212, 40, 100);
 
         GradientPaint gp = new GradientPaint(21, 115,
                 new Color(255, 8, 0),
@@ -97,19 +112,29 @@ public class TreeAnimation extends JPanel implements ActionListener {
                 true);
         g2d.setPaint(gp);
 
-        g2d.fillRect(21, 115, 18, 19);
-        g2d.fillRect(-12, 126, 18, 19);
-        g2d.fillRect(17, 170, 18, 19);
+        g2d.fillRect(21, 107, 18, 19);
+        g2d.fillRect(-12, 118, 18, 19);
+        g2d.fillRect(17, 162, 18, 19);
+    }
+
+    private GeneralPath drawPathByPoints(double[][] points) {
+        GeneralPath path = new GeneralPath();
+        path.moveTo(points[0][0], points[0][1]);
+        for (int k = 1; k < points.length; k++) {
+            path.lineTo(points[k][0], points[k][1]);
+        }
+        path.closePath();
+        return path;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (scale < 0.1 || scale > 0.99) {
-            delta = -delta;
+            scaleDelta = -scaleDelta;
         }
 
-        scale += delta;
-        angle -= 0.01;
+        scale += scaleDelta;
+        angle -= angleDelta;
 
         repaint();
     }
