@@ -15,8 +15,7 @@ public class TreeAnimation extends JPanel implements ActionListener {
     private double scaleDelta = 0.01;
 
     private Timer timer;
-    private final static int DELAY_DIFFERENCE = 10;
-    private final static int BORDER_OFFSET = 40;
+    private final static int BORDER_OFFSET = 20;
 
     public TreeAnimation() {
         timer = new Timer(10, this);
@@ -35,7 +34,7 @@ public class TreeAnimation extends JPanel implements ActionListener {
             public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e) && Math.abs(scaleDelta) > 0.001) {
                     scaleDelta = Math.signum(scaleDelta) * (Math.abs(scaleDelta) - 0.001);
-                } else if (SwingUtilities.isLeftMouseButton(e) && Math.abs(scaleDelta) < 0.01) {
+                } else if (SwingUtilities.isLeftMouseButton(e) && Math.abs(scaleDelta) < 0.02) {
                     scaleDelta = Math.signum(scaleDelta) * (Math.abs(scaleDelta) + 0.001);
                 }
             }
@@ -70,9 +69,17 @@ public class TreeAnimation extends JPanel implements ActionListener {
         );
 
         double[][] starPoints = {
-                {-30, -20}, {-10, -23}, {0, -50}, {10, -23},
-                {30, -20}, {15, -10}, {18, 13}, {0, 0},
-                {-18, 13}, {-15, -10}, {-30, -20}
+                {-30, -20},
+                {-10, -23},
+                {0, -50},
+                {10, -23},
+                {30, -20},
+                {15, -10},
+                {18, 13},
+                {0, 0},
+                {-18, 13},
+                {-15, -10},
+                {-30, -20}
         };
 
         GeneralPath star = drawPathByPoints(starPoints);
@@ -110,8 +117,8 @@ public class TreeAnimation extends JPanel implements ActionListener {
                 26, 120,
                 new Color(251, 255, 245),
                 true);
-        g2d.setPaint(gp);
 
+        g2d.setPaint(gp);
         g2d.fillRect(21, 107, 18, 19);
         g2d.fillRect(-12, 118, 18, 19);
         g2d.fillRect(17, 162, 18, 19);
@@ -137,18 +144,6 @@ public class TreeAnimation extends JPanel implements ActionListener {
         angle -= angleDelta;
 
         repaint();
-    }
-
-    private void increaseTimerDelay() {
-        int newDelay = timer.getDelay() + DELAY_DIFFERENCE;
-        if (newDelay <= 100)
-            timer.setDelay(newDelay);
-    }
-
-    private void reduceTimerDelay() {
-        int newDelay = timer.getDelay() - DELAY_DIFFERENCE;
-        if (newDelay >= 10)
-            timer.setDelay(newDelay);
     }
 
     public void setMaxWidth(int maxWidth) {
