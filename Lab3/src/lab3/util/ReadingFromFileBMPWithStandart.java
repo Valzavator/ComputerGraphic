@@ -1,4 +1,4 @@
-package lab3;
+package lab3.util;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

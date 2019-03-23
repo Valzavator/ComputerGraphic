@@ -1,4 +1,4 @@
-package lab3;
+package lab3.util;
 
 public class HeaderBitmapImage {
 

@@ -1,4 +1,4 @@
-package lab3;
+package lab3.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
