@@ -180,17 +180,27 @@ public class BombBird extends Application {
 
         // RIGHT EYE
 
-        Arc backOfRightEyeArc = new Arc();
-        backOfRightEyeArc.setCenterX(x(151));
-        backOfRightEyeArc.setCenterY(y(90));
-        backOfRightEyeArc.setRadiusX(15);
-        backOfRightEyeArc.setRadiusY(15);
-        backOfRightEyeArc.setType(ArcType.OPEN);
-        backOfRightEyeArc.setStartAngle(-50);
-        backOfRightEyeArc.setLength(230);
-        backOfRightEyeArc.setFill(Color.rgb(67, 67, 67));
+        Path backOfRightEyePath = new Path();
+        MoveTo backOfRightEyeMoveTo = new MoveTo();
+        backOfRightEyeMoveTo.setX(x(157));
+        backOfRightEyeMoveTo.setY(y(100));
 
-        root.getChildren().add(backOfRightEyeArc);
+        QuadCurveTo backOfRightEyeCurveTo = new QuadCurveTo();
+        backOfRightEyeCurveTo.setX(x(166));
+        backOfRightEyeCurveTo.setY(y(90));
+        backOfRightEyeCurveTo.setControlX(x(168));
+        backOfRightEyeCurveTo.setControlY(y(103));
+
+        ArcTo backOfRightEyeArcTo = new ArcTo();
+        backOfRightEyeArcTo.setX(x(136));
+        backOfRightEyeArcTo.setY(y(93));
+        backOfRightEyeArcTo.setRadiusX(15);
+        backOfRightEyeArcTo.setRadiusY(15);
+
+        backOfRightEyePath.getElements().addAll(backOfRightEyeMoveTo, backOfRightEyeCurveTo, backOfRightEyeArcTo);
+        backOfRightEyePath.setFill(Color.rgb(67, 67, 67));
+
+        root.getChildren().add(backOfRightEyePath);
 
         Path rightEyePath = new Path();
         MoveTo rightEyeMoveTo = new MoveTo();
@@ -387,7 +397,6 @@ public class BombBird extends Application {
         root.getChildren().add(stomachPath);
 
         // ANIMATION
-
 
         PrintingImage pr = new PrintingImage();
         Path path = USE_BMP_TRAJECTORY
