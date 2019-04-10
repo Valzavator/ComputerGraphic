@@ -21,6 +21,7 @@ import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 public class AppearenceSphere {
+	public static transient  volatile int i = 0;
 
 	public static void main(String[] args) {
 		new AppearenceSphere();

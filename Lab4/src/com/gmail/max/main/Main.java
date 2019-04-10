@@ -1,28 +1,14 @@
-package lab4.examples.main;
+package com.gmail.max.main;
 
-import javax.media.j3d.BranchGroup;
-import com.sun.j3d.utils.geometry.ColorCube;
-import com.sun.j3d.utils.universe.SimpleUniverse;
+import com.gmail.max.airplane.Airplane;
 
 public class Main {
 
     public static void main(String[] args) {
-        new Main();
-    }
-
-    public Main()
-
-    {
-        // створюємо простір, в якому будемо працювати
-        SimpleUniverse universe = new SimpleUniverse();
-        // створюємо групу, в яку додаємо об'єкти для відображення
-        BranchGroup group = new BranchGroup();
-        // додаємо в групу куб зі стороною, що дорівнює 0.3 від штрини вікна
-        group.addChild(new ColorCube(0.3));
-        // встановлюємо точку перегляду за замовченням
-        universe.getViewingPlatform().setNominalViewingTransform();
-        // додаємо створену групу у простір
-        universe.addBranchGraph(group);
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            Airplane redCube = new Airplane();
+            redCube.setVisible(true);
+        });
     }
 }
 
