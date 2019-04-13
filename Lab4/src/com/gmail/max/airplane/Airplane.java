@@ -22,8 +22,8 @@ public class Airplane extends JFrame implements ActionListener {
     private static final float LOWER_EYE_LIMIT = -30.0f;
     private static final float FARTHEST_EYE_LIMIT = 30.0f;
     private static final float NEAREST_EYE_LIMIT = 5.0f;
-    private static final float DELTA_ANGLE = 0.06f;
-    private static final float DELTA_DISTANCE = 0.5f;
+    private static final float DELTA_ANGLE = 0.08f;
+    private static final float DELTA_DISTANCE = 0.8f;
 
     private TransformGroup viewingTransformGroup;
     private TransformGroup rotateTransformGroup;
@@ -113,21 +113,12 @@ public class Airplane extends JFrame implements ActionListener {
 
         buildAirplane();
 
-        //Create Alpha object for the rotation of the cube
-        Alpha spinAlpha = new Alpha(-1, 10000);
-        //Create object for the spin of the cube passing the Alpha value and the transform group to target
-        RotationInterpolator spin = new RotationInterpolator(spinAlpha, rotateTransformGroup);
-        //Set the bounds for the spin
-        spin.setSchedulingBounds(new BoundingSphere(new Point3d(), 10000));
-
-        //Add the spin to the transform group
-//        rotateTransformGroup.addChild(spin);
-
         //Add the transform group to the BranchGroup
         objRoot.addChild(rotateTransformGroup);
 
         BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 1000.0);
-        Color3f light1Color = new Color3f(1.0f, 0.5f, 0.4f);
+
+        Color3f light1Color = new Color3f(1.0f, 1f, 1f);
         Vector3f light1Direction = new Vector3f(4.0f, -7.0f, -12.0f);
         DirectionalLight light1 = new DirectionalLight(light1Color, light1Direction);
         light1.setInfluencingBounds(bounds);
@@ -143,66 +134,108 @@ public class Airplane extends JFrame implements ActionListener {
         AmbientLight ambientLightNode = new AmbientLight(ambientColor);
         ambientLightNode.setInfluencingBounds(bounds);
         objRoot.addChild(ambientLightNode);
+
         return objRoot;
     }
 
     private void buildAirplane() {
-        //Add a new cube to the
-        rotateTransformGroup.addChild(new Cylinder(1, 10));
 
-        // back
-        Sphere sphere = new Sphere(0.9f, 3, 60);
-        Transform3D sphereT = new Transform3D();
-        sphereT.setTranslation(new Vector3f(0, 5f, -0.09f));
-        TransformGroup sphereTG = new TransformGroup();
-        sphereTG.setTransform(sphereT);
-        sphereTG.addChild(sphere);
+        // main body
+        Cylinder centreFuselage = new Cylinder(
+                1,
+                10,
+                AppearanceUtils.getGreyAppearance()
+        );
 
-        Cone cone = new Cone(1, 3);
-        Transform3D coneT = new Transform3D();
-        coneT.rotX(18 * Math.PI / 180.0);
-        coneT.setTranslation(new Vector3f(0, 6.5f, 0.5f));
-        TransformGroup coneTG = new TransformGroup();
-        coneTG.setTransform(coneT);
-        coneTG.addChild(cone);
+        // Rear Fuselage
+
+        Sphere rearFuselageSphere = new Sphere(
+                0.9f,
+                AppearanceUtils.getGreyAppearance()
+        );
+        Transform3D rearFuselageSphereT = new Transform3D();
+        rearFuselageSphereT.setTranslation(new Vector3f(0, 5f, -0.09f));
+        TransformGroup rearFuselageSphereTG = new TransformGroup();
+        rearFuselageSphereTG.setTransform(rearFuselageSphereT);
+        rearFuselageSphereTG.addChild(rearFuselageSphere);
+
+        Cone rearFuselageCone = new Cone(
+                1,
+                3,
+                AppearanceUtils.getGreyAppearance()
+        );
+        Transform3D rearFuselageConeT = new Transform3D();
+        rearFuselageConeT.rotX(18 * Math.PI / 180.0);
+        rearFuselageConeT.setTranslation(new Vector3f(0, 6.5f, 0.5f));
+        TransformGroup rearFuselageConeTG = new TransformGroup();
+        rearFuselageConeTG.setTransform(rearFuselageConeT);
+        rearFuselageConeTG.addChild(rearFuselageCone);
 
 
-        // front
-        Sphere sphere2 = new Sphere(1f, 3, 60);
-        Transform3D sphereT2 = new Transform3D();
-        sphereT2.setTranslation(new Vector3f(0, -5f, -0.19f));
-        sphereT2.setScale(new Vector3d(0.9f, 1.7f, 0.8));
-        TransformGroup sphereTG2 = new TransformGroup();
-        sphereTG2.setTransform(sphereT2);
-        sphereTG2.addChild(sphere2);
+        // Forward Fuselage
 
-        Cone cone2 = new Cone(1, 1.5f);
-        Transform3D coneT2 = new Transform3D();
-        coneT2.rotZ(Math.PI);
-        coneT2.setTranslation(new Vector3f(0, -5.75f, 0));
-        TransformGroup coneTG2 = new TransformGroup();
-        coneTG2.setTransform(coneT2);
-        coneTG2.addChild(cone2);
+        Sphere forwardFuselageSphere = new Sphere(
+                1f,
+                3,
+                60,
+                AppearanceUtils.getGreyAppearance()
+        );
+        Transform3D forwardFuselageSphereT = new Transform3D();
+        forwardFuselageSphereT.setTranslation(new Vector3f(0, -5f, -0.19f));
+        forwardFuselageSphereT.setScale(new Vector3d(0.9f, 2f, 0.8));
+        TransformGroup forwardFuselageSphereTG = new TransformGroup();
+        forwardFuselageSphereTG.setTransform(forwardFuselageSphereT);
+        forwardFuselageSphereTG.addChild(forwardFuselageSphere);
 
-        //
+        Cone forwardFuselageSphereCone = new Cone(
+                1,
+                1.5f,
+                AppearanceUtils.getAppearance(
+                        new Color(56, 74, 174), null)
+        );
+        Transform3D forwardFuselageSphereConeT = new Transform3D();
+        forwardFuselageSphereConeT.rotZ(Math.PI);
+        forwardFuselageSphereConeT.setTranslation(new Vector3f(0, -5.75f, 0));
+        TransformGroup forwardFuselageSphereConeTG = new TransformGroup();
+        forwardFuselageSphereConeTG.setTransform(forwardFuselageSphereConeT);
+        forwardFuselageSphereConeTG.addChild(forwardFuselageSphereCone);
 
-        Box box1 = new Box(0.07f, 0.4f, 1.5f, null);
-        Transform3D boxT1 = new Transform3D();
-        boxT1.rotX(-18 * Math.PI / 180.0);
-        boxT1.setTranslation(new Vector3f(0, 6.5f, 1.5f));
-        TransformGroup boxTG1 = new TransformGroup();
-        boxTG1.setTransform(boxT1);
-        boxTG1.addChild(box1);
+        // Tail Fin
 
-        Box box2 = new Box(0.07f, 0.4f, 1.7f, null);
-        Transform3D boxT2 = new Transform3D();
-        boxT2.rotX(-40 * Math.PI / 180.0);
-        boxT2.setTranslation(new Vector3f(0, 5.8f, 1.5f));
-        TransformGroup boxTG2 = new TransformGroup();
-        boxTG2.setTransform(boxT2);
-        boxTG2.addChild(box2);
+        Box tailFin1 = new Box(
+                0.07f,
+                0.4f,
+                1.5f,
+                AppearanceUtils.getAppearance(new Color(53, 43, 224), null)
+        );
+        Transform3D tailFinT1 = new Transform3D();
+        tailFinT1.rotX(-18 * Math.PI / 180.0);
+        tailFinT1.setTranslation(new Vector3f(0, 6.5f, 1.5f));
+        TransformGroup tailFinTG1 = new TransformGroup();
+        tailFinTG1.setTransform(tailFinT1);
+        tailFinTG1.addChild(tailFin1);
 
-        Box leftHorizStabilizer = new Box(2f, 0.4f, 0.07f, null);
+        Box tailFin2 = new Box(
+                0.07f,
+                0.4f,
+                1.7f,
+                AppearanceUtils.getAppearance(new Color(53, 43, 224), null)
+        );
+        Transform3D tailFinT2 = new Transform3D();
+        tailFinT2.rotX(-40 * Math.PI / 180.0);
+        tailFinT2.setTranslation(new Vector3f(0, 5.8f, 1.5f));
+        TransformGroup tailFinTG2 = new TransformGroup();
+        tailFinTG2.setTransform(tailFinT2);
+        tailFinTG2.addChild(tailFin2);
+
+        // Horizontal Stabilizer
+
+        Box leftHorizStabilizer = new Box(
+                2f,
+                0.4f,
+                0.07f,
+                AppearanceUtils.getAppearance(new Color(217, 208, 46), null)
+        );
         Transform3D leftHorizStabilizerT = new Transform3D();
         leftHorizStabilizerT.rotZ(40 * Math.PI / 180.0);
         leftHorizStabilizerT.setTranslation(new Vector3f(1, 5.8f, 0.4f));
@@ -210,7 +243,12 @@ public class Airplane extends JFrame implements ActionListener {
         leftHorizStabilizerTG.setTransform(leftHorizStabilizerT);
         leftHorizStabilizerTG.addChild(leftHorizStabilizer);
 
-        Box rightHorizStabilizer = new Box(2f, 0.4f, 0.07f, null);
+        Box rightHorizStabilizer = new Box(
+                2f,
+                0.4f,
+                0.07f,
+                AppearanceUtils.getAppearance(new Color(217, 208, 46), null)
+        );
         Transform3D rightHorizStabilizerT = new Transform3D();
         rightHorizStabilizerT.rotZ(-40 * Math.PI / 180.0);
         rightHorizStabilizerT.setTranslation(new Vector3f(-1, 5.8f, 0.4f));
@@ -218,16 +256,26 @@ public class Airplane extends JFrame implements ActionListener {
         rightHorizStabilizerTG.setTransform(rightHorizStabilizerT);
         rightHorizStabilizerTG.addChild(rightHorizStabilizer);
 
-        Box pairHorizStabilizer = new Box(1.5f, 0.5f, 0.07f, null);
+        Box pairHorizStabilizer = new Box(
+                1.5f,
+                0.5f,
+                0.07f,
+                AppearanceUtils.getAppearance(new Color(217, 208, 46), null)
+        );
         Transform3D pairHorizStabilizerT = new Transform3D();
         pairHorizStabilizerT.setTranslation(new Vector3f(0, 6.3f, 0.4f));
         TransformGroup pairHorizStabilizerTG = new TransformGroup();
         pairHorizStabilizerTG.setTransform(pairHorizStabilizerT);
         pairHorizStabilizerTG.addChild(pairHorizStabilizer);
 
-        // left wing
+        // Wings
 
-        Box leftWing1 = new Box(5f, 1f, 0.07f, null);
+        Box leftWing1 = new Box(
+                4f,
+                1f,
+                0.07f,
+                AppearanceUtils.getGreyAppearance()
+        );
         Transform3D leftWingT1 = new Transform3D();
         leftWingT1.rotZ(30 * Math.PI / 180.0);
         leftWingT1.setTranslation(new Vector3f(4, 0.5f, -0.1f));
@@ -235,9 +283,24 @@ public class Airplane extends JFrame implements ActionListener {
         leftWingTG1.setTransform(leftWingT1);
         leftWingTG1.addChild(leftWing1);
 
-        // right wing
+        Box leftWing2 = new Box(
+                0.455f,
+                0.894f,
+                0.07f,
+                AppearanceUtils.getGreyAppearance()
+        );
+        Transform3D leftWingT2 = new Transform3D();
+        leftWingT2.setTranslation(new Vector3f(7.47f, 2.48f, -0.1f));
+        TransformGroup leftWingTG2 = new TransformGroup();
+        leftWingTG2.setTransform(leftWingT2);
+        leftWingTG2.addChild(leftWing2);
 
-        Box rightWing1 = new Box(5f, 1f, 0.07f, null);
+        Box rightWing1 = new Box(
+                4f,
+                1f,
+                0.07f,
+                AppearanceUtils.getGreyAppearance()
+        );
         Transform3D rightWingT1 = new Transform3D();
         rightWingT1.rotZ(-30 * Math.PI / 180.0);
         rightWingT1.setTranslation(new Vector3f(-4, 0.5f, -0.1f));
@@ -245,29 +308,104 @@ public class Airplane extends JFrame implements ActionListener {
         rightWingTG1.setTransform(rightWingT1);
         rightWingTG1.addChild(rightWing1);
 
-        Box pairWing = new Box(4f, 1f, 0.07f, null);
+        Box rightWing2 = new Box(
+                0.455f,
+                0.894f,
+                0.07f,
+                AppearanceUtils.getGreyAppearance()
+        );
+        Transform3D rightWingT2 = new Transform3D();
+        rightWingT2.setTranslation(new Vector3f(-7.47f, 2.48f, -0.1f));
+        TransformGroup rightWingTG2 = new TransformGroup();
+        rightWingTG2.setTransform(rightWingT2);
+        rightWingTG2.addChild(rightWing2);
+
+        Box pairWing = new Box(
+                4f,
+                1f,
+                0.07f,
+                AppearanceUtils.getGreyAppearance()
+        );
         Transform3D pairWingT = new Transform3D();
         pairWingT.setTranslation(new Vector3f(0, 0.7f, -0.1f));
         TransformGroup pairWingTG = new TransformGroup();
         pairWingTG.setTransform(pairWingT);
         pairWingTG.addChild(pairWing);
 
-        rotateTransformGroup.addChild(coneTG);
-        rotateTransformGroup.addChild(sphereTG);
+        // left engines
 
-        rotateTransformGroup.addChild(coneTG2);
-        rotateTransformGroup.addChild(sphereTG2);
+        Sphere leftEngineSphere1 = new Sphere(
+                0.4f,
+                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)
+        );
+        Transform3D leftEngineSphereT1 = new Transform3D();
+        leftEngineSphereT1.setTranslation(new Vector3f(2.5f, -1.3f, -0.45f));
+        leftEngineSphereT1.setScale(new Vector3d(1f, 2.5f, 1));
+        TransformGroup leftEngineSphereTG1 = new TransformGroup();
+        leftEngineSphereTG1.setTransform(leftEngineSphereT1);
+        leftEngineSphereTG1.addChild(leftEngineSphere1);
 
-        rotateTransformGroup.addChild(boxTG1);
-        rotateTransformGroup.addChild(boxTG2);
+        Sphere leftEngineSphere2 = new Sphere(
+                0.4f,
+                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)
+        );
+        Transform3D leftEngineSphereT2 = new Transform3D();
+        leftEngineSphereT2.setTranslation(new Vector3f(4.5f, -0.1f, -0.45f));
+        leftEngineSphereT2.setScale(new Vector3d(1f, 2.5f, 1));
+        TransformGroup leftEngineSphereTG2 = new TransformGroup();
+        leftEngineSphereTG2.setTransform(leftEngineSphereT2);
+        leftEngineSphereTG2.addChild(leftEngineSphere2);
+
+        // right engines
+
+        Sphere rightEngineSphere1 = new Sphere(
+                0.4f,
+                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)
+        );
+        Transform3D rightEngineSphereT1 = new Transform3D();
+        rightEngineSphereT1.setTranslation(new Vector3f(-2.5f, -1.3f, -0.45f));
+        rightEngineSphereT1.setScale(new Vector3d(1f, 2.5f, 1));
+        TransformGroup rightEngineSphereTG1 = new TransformGroup();
+        rightEngineSphereTG1.setTransform(rightEngineSphereT1);
+        rightEngineSphereTG1.addChild(rightEngineSphere1);
+
+        Sphere rightEngineSphere2 = new Sphere(
+                0.4f,
+                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)
+        );
+        Transform3D rightEngineSphereT2 = new Transform3D();
+        rightEngineSphereT2.setTranslation(new Vector3f(-4.5f, -0.1f, -0.45f));
+        rightEngineSphereT2.setScale(new Vector3d(1f, 2.5f, 1));
+        TransformGroup rightEngineSphereTG2 = new TransformGroup();
+        rightEngineSphereTG2.setTransform(rightEngineSphereT2);
+        rightEngineSphereTG2.addChild(rightEngineSphere2);
+
+        rotateTransformGroup.addChild(centreFuselage);
+
+        rotateTransformGroup.addChild(rearFuselageSphereTG);
+        rotateTransformGroup.addChild(rearFuselageConeTG);
+
+        rotateTransformGroup.addChild(forwardFuselageSphereTG);
+        rotateTransformGroup.addChild(forwardFuselageSphereConeTG);
+
+        rotateTransformGroup.addChild(tailFinTG1);
+        rotateTransformGroup.addChild(tailFinTG2);
 
         rotateTransformGroup.addChild(leftHorizStabilizerTG);
         rotateTransformGroup.addChild(rightHorizStabilizerTG);
         rotateTransformGroup.addChild(pairHorizStabilizerTG);
 
         rotateTransformGroup.addChild(leftWingTG1);
-        rotateTransformGroup.addChild(pairWingTG);
+        rotateTransformGroup.addChild(leftWingTG2);
         rotateTransformGroup.addChild(rightWingTG1);
+        rotateTransformGroup.addChild(rightWingTG2);
+        rotateTransformGroup.addChild(pairWingTG);
+
+        rotateTransformGroup.addChild(leftEngineSphereTG1);
+        rotateTransformGroup.addChild(leftEngineSphereTG2);
+
+        rotateTransformGroup.addChild(rightEngineSphereTG1);
+        rotateTransformGroup.addChild(rightEngineSphereTG2);
     }
 
     @Override
