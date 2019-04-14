@@ -1,4 +1,4 @@
-package com.gmail.max.airplane;
+package com.gmail.max.airplane.model;
 
 import javax.media.j3d.*;
 import javax.swing.*;
@@ -7,6 +7,8 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
+import com.gmail.max.airplane.shape_transform.ShapeTransform;
+import com.gmail.max.airplane.utils.AppearanceUtils;
 import com.sun.j3d.utils.geometry.*;
 import com.sun.j3d.utils.geometry.Box;
 import com.sun.j3d.utils.universe.SimpleUniverse;
@@ -163,6 +165,7 @@ public class Airplane extends JFrame implements ActionListener {
     }
 
     private void buildAirplane() {
+        ShapeTransform shapeTransform = new ShapeTransform();
         int primFlags = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
 
         // main body
@@ -230,263 +233,188 @@ public class Airplane extends JFrame implements ActionListener {
 
         // Tail Fin
 
-        Box tailFin1 = new Box(
+
+        TransformGroup tailFinTG1 = shapeTransform.setShape(new Box(
                 0.07f,
                 0.4f,
                 1.5f,
                 primFlags,
-                AppearanceUtils.getAppearance(new Color(53, 43, 224), null)
-        );
-        Transform3D tailFinT1 = new Transform3D();
-        tailFinT1.rotX(-18 * Math.PI / 180.0);
-        tailFinT1.setTranslation(new Vector3f(0, 6.5f, 1.5f));
-        TransformGroup tailFinTG1 = new TransformGroup();
-        tailFinTG1.setTransform(tailFinT1);
-        tailFinTG1.addChild(tailFin1);
+                AppearanceUtils.getAppearance(new Color(53, 43, 224), null)))
+                .rotX(-18)
+                .setTranslation(0, 6.5f, 1.5f)
+                .getTransformGroup();
 
-        Box tailFin2 = new Box(
+        TransformGroup tailFinTG2 = shapeTransform.setShape(new Box(
                 0.07f,
                 0.4f,
                 1.7f,
                 primFlags,
-                AppearanceUtils.getAppearance(new Color(53, 43, 224), null)
-        );
-        Transform3D tailFinT2 = new Transform3D();
-        tailFinT2.rotX(-40 * Math.PI / 180.0);
-        tailFinT2.setTranslation(new Vector3f(0, 5.8f, 1.5f));
-        TransformGroup tailFinTG2 = new TransformGroup();
-        tailFinTG2.setTransform(tailFinT2);
-        tailFinTG2.addChild(tailFin2);
+                AppearanceUtils.getAppearance(new Color(53, 43, 224), null)))
+                .rotX(-40)
+                .setTranslation(0, 5.8f, 1.5f)
+                .getTransformGroup();
 
         // Horizontal Stabilizer
 
-        Box leftHorizStabilizer = new Box(
+        TransformGroup leftHorizStabilizerTG = shapeTransform.setShape(new Box(
                 2f,
                 0.4f,
                 0.07f,
                 primFlags,
-                AppearanceUtils.getAppearance(new Color(217, 208, 46), null)
-        );
-        Transform3D leftHorizStabilizerT = new Transform3D();
-        leftHorizStabilizerT.rotZ(40 * Math.PI / 180.0);
-        leftHorizStabilizerT.setTranslation(new Vector3f(1, 5.8f, 0.4f));
-        TransformGroup leftHorizStabilizerTG = new TransformGroup();
-        leftHorizStabilizerTG.setTransform(leftHorizStabilizerT);
-        leftHorizStabilizerTG.addChild(leftHorizStabilizer);
+                AppearanceUtils.getAppearance(new Color(217, 208, 46), null)))
+                .rotZ(40)
+                .setTranslation(1, 5.8f, 0.4f)
+                .getTransformGroup();
 
-        Box rightHorizStabilizer = new Box(
+        TransformGroup rightHorizStabilizerTG = shapeTransform.setShape(new Box(
                 2f,
                 0.4f,
                 0.07f,
                 primFlags,
-                AppearanceUtils.getAppearance(new Color(217, 208, 46), null)
-        );
-        Transform3D rightHorizStabilizerT = new Transform3D();
-        rightHorizStabilizerT.rotZ(-40 * Math.PI / 180.0);
-        rightHorizStabilizerT.setTranslation(new Vector3f(-1, 5.8f, 0.4f));
-        TransformGroup rightHorizStabilizerTG = new TransformGroup();
-        rightHorizStabilizerTG.setTransform(rightHorizStabilizerT);
-        rightHorizStabilizerTG.addChild(rightHorizStabilizer);
+                AppearanceUtils.getAppearance(new Color(217, 208, 46), null)))
+                .rotZ(-40)
+                .setTranslation(-1, 5.8f, 0.4f)
+                .getTransformGroup();
 
-        Box pairHorizStabilizer = new Box(
+        TransformGroup pairHorizStabilizerTG = shapeTransform.setShape(new Box(
                 1.5f,
                 0.5f,
                 0.07f,
                 primFlags,
-                AppearanceUtils.getAppearance(new Color(217, 208, 46), null)
-        );
-        Transform3D pairHorizStabilizerT = new Transform3D();
-        pairHorizStabilizerT.setTranslation(new Vector3f(0, 6.3f, 0.4f));
-        TransformGroup pairHorizStabilizerTG = new TransformGroup();
-        pairHorizStabilizerTG.setTransform(pairHorizStabilizerT);
-        pairHorizStabilizerTG.addChild(pairHorizStabilizer);
+                AppearanceUtils.getAppearance(new Color(217, 208, 46), null)))
+                .setTranslation(0, 6.3f, 0.4f)
+                .getTransformGroup();
 
         // Wings
 
-        Box leftWing1 = new Box(
+        TransformGroup leftWingTG1 = shapeTransform.setShape(new Box(
                 4f,
                 1f,
                 0.07f,
                 primFlags,
-                AppearanceUtils.getGreyAppearance()
-        );
-        Transform3D leftWingT1 = new Transform3D();
-        leftWingT1.rotZ(30 * Math.PI / 180.0);
-        leftWingT1.setTranslation(new Vector3f(4, 0.5f, -0.1f));
-        TransformGroup leftWingTG1 = new TransformGroup();
-        leftWingTG1.setTransform(leftWingT1);
-        leftWingTG1.addChild(leftWing1);
+                AppearanceUtils.getGreyAppearance()))
+                .rotZ(30)
+                .setTranslation(4, 0.5f, -0.1f)
+                .getTransformGroup();
 
-        Box leftWing2 = new Box(
+        TransformGroup leftWingTG2 = shapeTransform.setShape(new Box(
                 0.455f,
                 0.894f,
                 0.07f,
                 primFlags,
-                AppearanceUtils.getGreyAppearance()
-        );
-        Transform3D leftWingT2 = new Transform3D();
-        leftWingT2.setTranslation(new Vector3f(7.47f, 2.48f, -0.1f));
-        TransformGroup leftWingTG2 = new TransformGroup();
-        leftWingTG2.setTransform(leftWingT2);
-        leftWingTG2.addChild(leftWing2);
+                AppearanceUtils.getGreyAppearance()))
+                .setTranslation(7.47f, 2.48f, -0.1f)
+                .getTransformGroup();
 
-        Box rightWing1 = new Box(
+        TransformGroup rightWingTG1 = shapeTransform.setShape(new Box(
                 4f,
                 1f,
                 0.07f,
                 primFlags,
-                AppearanceUtils.getGreyAppearance()
-        );
-        Transform3D rightWingT1 = new Transform3D();
-        rightWingT1.rotZ(-30 * Math.PI / 180.0);
-        rightWingT1.setTranslation(new Vector3f(-4, 0.5f, -0.1f));
-        TransformGroup rightWingTG1 = new TransformGroup();
-        rightWingTG1.setTransform(rightWingT1);
-        rightWingTG1.addChild(rightWing1);
+                AppearanceUtils.getGreyAppearance()))
+                .rotZ(-30)
+                .setTranslation(-4, 0.5f, -0.1f)
+                .getTransformGroup();
 
-        Box rightWing2 = new Box(
+        TransformGroup rightWingTG2 = shapeTransform.setShape(new Box(
                 0.455f,
                 0.894f,
                 0.07f,
                 primFlags,
-                AppearanceUtils.getGreyAppearance()
-        );
-        Transform3D rightWingT2 = new Transform3D();
-        rightWingT2.setTranslation(new Vector3f(-7.47f, 2.48f, -0.1f));
-        TransformGroup rightWingTG2 = new TransformGroup();
-        rightWingTG2.setTransform(rightWingT2);
-        rightWingTG2.addChild(rightWing2);
+                AppearanceUtils.getGreyAppearance()))
+                .setTranslation(-7.47f, 2.48f, -0.1f)
+                .getTransformGroup();
 
-        Box pairWing = new Box(
+        TransformGroup pairWingTG = shapeTransform.setShape(new Box(
                 4f,
                 1f,
                 0.07f,
                 primFlags,
-                AppearanceUtils.getGreyAppearance()
-        );
-        Transform3D pairWingT = new Transform3D();
-        pairWingT.setTranslation(new Vector3f(0, 0.7f, -0.1f));
-        TransformGroup pairWingTG = new TransformGroup();
-        pairWingTG.setTransform(pairWingT);
-        pairWingTG.addChild(pairWing);
+                AppearanceUtils.getGreyAppearance()))
+                .setTranslation(0, 0.7f, -0.1f)
+                .getTransformGroup();
 
         // left engines
 
-        Sphere leftEngineSphere1 = new Sphere(
+        TransformGroup leftEngineSphereTG1 = shapeTransform.setShape(new Sphere(
                 0.4f,
                 primFlags,
                 60,
-                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)
-        );
-        Transform3D leftEngineSphereT1 = new Transform3D();
-        leftEngineSphereT1.setTranslation(new Vector3f(2.5f, -1.3f, -0.45f));
-        leftEngineSphereT1.setScale(new Vector3d(1f, 2.5f, 1));
-        TransformGroup leftEngineSphereTG1 = new TransformGroup();
-        leftEngineSphereTG1.setTransform(leftEngineSphereT1);
-        leftEngineSphereTG1.addChild(leftEngineSphere1);
+                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)))
+                .setTranslation(2.5f, -1.3f, -0.45f)
+                .setScale(1, 2.5f, 1)
+                .getTransformGroup();
 
-        Sphere leftEngineSphere2 = new Sphere(
+        TransformGroup leftEngineSphereTG2 = shapeTransform.setShape(new Sphere(
                 0.4f,
                 primFlags,
                 60,
-                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)
-        );
-        Transform3D leftEngineSphereT2 = new Transform3D();
-        leftEngineSphereT2.setTranslation(new Vector3f(4.5f, -0.1f, -0.45f));
-        leftEngineSphereT2.setScale(new Vector3d(1f, 2.5f, 1));
-        TransformGroup leftEngineSphereTG2 = new TransformGroup();
-        leftEngineSphereTG2.setTransform(leftEngineSphereT2);
-        leftEngineSphereTG2.addChild(leftEngineSphere2);
+                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)))
+                .setTranslation(4.5f, -0.1f, -0.45f)
+                .setScale(1, 2.5f, 1)
+                .getTransformGroup();
 
         // right engines
 
-        Sphere rightEngineSphere1 = new Sphere(
+        TransformGroup rightEngineSphereTG1 = shapeTransform.setShape(new Sphere(
                 0.4f,
                 primFlags,
                 60,
-                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)
-        );
-        Transform3D rightEngineSphereT1 = new Transform3D();
-        rightEngineSphereT1.setTranslation(new Vector3f(-2.5f, -1.3f, -0.45f));
-        rightEngineSphereT1.setScale(new Vector3d(1f, 2.5f, 1));
-        TransformGroup rightEngineSphereTG1 = new TransformGroup();
-        rightEngineSphereTG1.setTransform(rightEngineSphereT1);
-        rightEngineSphereTG1.addChild(rightEngineSphere1);
+                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)))
+                .setTranslation(-2.5f, -1.3f, -0.45f)
+                .setScale(1, 2.5f, 1)
+                .getTransformGroup();
 
-        Sphere rightEngineSphere2 = new Sphere(
+        TransformGroup rightEngineSphereTG2 = shapeTransform.setShape(new Sphere(
                 0.4f,
                 primFlags,
                 60,
-                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)
-        );
-        Transform3D rightEngineSphereT2 = new Transform3D();
-        rightEngineSphereT2.setTranslation(new Vector3f(-4.5f, -0.1f, -0.45f));
-        rightEngineSphereT2.setScale(new Vector3d(1f, 2.5f, 1));
-        TransformGroup rightEngineSphereTG2 = new TransformGroup();
-        rightEngineSphereTG2.setTransform(rightEngineSphereT2);
-        rightEngineSphereTG2.addChild(rightEngineSphere2);
+                AppearanceUtils.getAppearance(new Color(50, 49, 49), null)))
+                .setTranslation(-4.5f, -0.1f, -0.45f)
+                .setScale(1, 2.5f, 1)
+                .getTransformGroup();
 
         // Navigation lights
 
-        Sphere leftNavigationLight = new Sphere(
+        TransformGroup leftNavigationLightTG = shapeTransform.setShape(new Sphere(
                 0.1f,
                 primFlags,
                 60,
-                AppearanceUtils.getEmissiveAppearance(Color.RED)
-        );
-        Transform3D leftNavigationLightT = new Transform3D();
-        leftNavigationLightT.setTranslation(new Vector3f(7.9f, 2.4f, 0.1f));
-        TransformGroup leftNavigationLightTG = new TransformGroup();
-        leftNavigationLightTG.setTransform(leftNavigationLightT);
-        leftNavigationLightTG.addChild(leftNavigationLight);
+                AppearanceUtils.getEmissiveAppearance(Color.RED)))
+                .setTranslation(7.9f, 2.4f, 0.1f)
+                .getTransformGroup();
 
-        Sphere rightNavigationLight = new Sphere(
+        TransformGroup rightNavigationLightTG = shapeTransform.setShape(new Sphere(
                 0.1f,
                 primFlags,
                 60,
-                AppearanceUtils.getEmissiveAppearance(Color.GREEN)
-        );
-        Transform3D rightNavigationLightT = new Transform3D();
-        rightNavigationLightT.setTranslation(new Vector3f(-7.9f, 2.4f, 0.1f));
-        TransformGroup rightNavigationLightTG = new TransformGroup();
-        rightNavigationLightTG.setTransform(rightNavigationLightT);
-        rightNavigationLightTG.addChild(rightNavigationLight);
+                AppearanceUtils.getEmissiveAppearance(Color.GREEN)))
+                .setTranslation(-7.9f, 2.4f, 0.1f)
+                .getTransformGroup();
 
-        Sphere tailNavigationLight = new Sphere(
+        TransformGroup tailNavigationLightTG = shapeTransform.setShape(new Sphere(
                 0.1f,
                 primFlags,
                 60,
-                AppearanceUtils.getEmissiveAppearance(Color.GREEN)
-        );
-        Transform3D tailNavigationLightT = new Transform3D();
-        tailNavigationLightT.setTranslation(new Vector3f(0, 7.8f, 0.9f));
-        TransformGroup tailNavigationLightTG = new TransformGroup();
-        tailNavigationLightTG.setTransform(tailNavigationLightT);
-        tailNavigationLightTG.addChild(tailNavigationLight);
+                AppearanceUtils.getEmissiveAppearance(Color.GREEN)))
+                .setTranslation(0, 7.8f, 0.9f)
+                .getTransformGroup();
 
-        Sphere centralNavigationLight = new Sphere(
+        TransformGroup centralNavigationLightTG = shapeTransform.setShape(new Sphere(
                 0.1f,
                 primFlags,
                 60,
-                AppearanceUtils.getEmissiveAppearance(Color.GREEN)
-        );
-        Transform3D centralNavigationLightT = new Transform3D();
-        centralNavigationLightT.setTranslation(new Vector3f(0, -1f, 1f));
-        TransformGroup centralNavigationLightTG = new TransformGroup();
-        centralNavigationLightTG.setTransform(centralNavigationLightT);
-        centralNavigationLightTG.addChild(centralNavigationLight);
+                AppearanceUtils.getEmissiveAppearance(Color.GREEN)))
+                .setTranslation(0, -1, 1)
+                .getTransformGroup();
 
-        Sphere bottomNavigationLight = new Sphere(
+        TransformGroup bottomNavigationLightTG = shapeTransform.setShape(new Sphere(
                 0.1f,
                 primFlags,
                 60,
-                AppearanceUtils.getEmissiveAppearance(Color.GREEN)
-        );
-        Transform3D bottomNavigationLightT = new Transform3D();
-        bottomNavigationLightT.setTranslation(new Vector3f(0, 5f, -1f));
-        TransformGroup bottomNavigationLightTG = new TransformGroup();
-        bottomNavigationLightTG.setTransform(bottomNavigationLightT);
-        bottomNavigationLightTG.addChild(bottomNavigationLight);
+                AppearanceUtils.getEmissiveAppearance(Color.GREEN)))
+                .setTranslation(0, 5, -1)
+                .getTransformGroup();
 
         airplaneTransformGroup.addChild(centreFuselage);
 
@@ -523,7 +451,6 @@ public class Airplane extends JFrame implements ActionListener {
 
     }
 
-    private int v = 255;
     @Override
     public void actionPerformed(ActionEvent e) {
         airplaneTransform3D.rotZ(zAngle);

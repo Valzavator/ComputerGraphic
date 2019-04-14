@@ -1,6 +1,6 @@
-package com.gmail.max.main;
+package com.gmail.max.airplane.main;
 
-import com.gmail.max.airplane.Airplane;
+import com.gmail.max.airplane.model.Airplane;
 
 public class Main {
 

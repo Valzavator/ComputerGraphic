@@ -1,4 +1,4 @@
-package com.gmail.max.airplane;
+package com.gmail.max.airplane.utils;
 
 import com.sun.j3d.utils.image.TextureLoader;
 
