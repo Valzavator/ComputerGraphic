@@ -14,21 +14,17 @@ public class AppearanceUtils {
     public static Appearance getAppearance(Color color, String texturePath) {
         Appearance ap = new Appearance();
 
-        Color3f emissive = new Color3f(new Color(0, 0, 0));
+        Color3f emissive = new Color3f(Color.BLACK);
         Color3f ambient = new Color3f(color);
         Color3f diffuse = new Color3f(color);
         Color3f specular = new Color3f(color);
 
-        // ambient, emissive, diffuse, specular, 1.0f
-
         ap.setMaterial(new Material(ambient, emissive, diffuse, specular, 64.0f));
 
         if (texturePath != null && !texturePath.isEmpty()) {
-            System.out.println("!!!");
-            // завантажуємо текстуру
             TextureLoader loader = new TextureLoader(texturePath, "LUMINANCE", new Container());
             Texture texture = loader.getTexture();
-            // задаємо властивості границі
+
             texture.setBoundaryModeS(Texture.WRAP);
             texture.setBoundaryModeT(Texture.WRAP);
             texture.setBoundaryColor(new Color4f(0.0f, 1.0f, 1.0f, 0.0f));
@@ -42,6 +38,20 @@ public class AppearanceUtils {
     }
 
     public static Appearance getGreyAppearance() {
-        return getAppearance(new Color(106, 106, 106), null);
+        return getAppearance(new Color(106, 106, 106), "resource\\images\\airplane-texture.jpg");
+    }
+
+    public static Appearance getEmissiveAppearance(Color color) {
+        Appearance ap = new Appearance();
+        Color3f emissive = new Color3f(color);
+        Color3f ambient = new Color3f(Color.BLACK);
+        Color3f diffuse = new Color3f(Color.BLACK);
+        Color3f specular = new Color3f(Color.BLACK);
+
+        Material material = new Material(ambient, emissive, diffuse, specular, 64.0f);
+
+        ap.setMaterial(material);
+
+        return ap;
     }
 }
