@@ -18,10 +18,10 @@ import java.awt.event.*;
 
 public class Airplane extends JFrame implements ActionListener {
 
-    private static final float UPPER_EYE_LIMIT = 30.0f;
-    private static final float LOWER_EYE_LIMIT = -30.0f;
-    private static final float FARTHEST_EYE_LIMIT = 30.0f;
-    private static final float NEAREST_EYE_LIMIT = 5.0f;
+    private static final float UPPER_EYE_LIMIT = 15.0f; //30.0f
+    private static final float LOWER_EYE_LIMIT = -15.0f; //-30.0f
+    private static final float FARTHEST_EYE_LIMIT = 15.0f; //30.0f
+    private static final float NEAREST_EYE_LIMIT = 2.0f; //5.0f
     private static final float DELTA_ANGLE = 0.06f;
     private static final float DELTA_DISTANCE = 1f;
 
@@ -38,7 +38,7 @@ public class Airplane extends JFrame implements ActionListener {
     private DirectionalLight light1;
     private DirectionalLight light2;
     private AmbientLight ambientLight;
-    private BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 1000.0);
+    private BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
 
     public Airplane() {
         setTitle("Lab 4 - Airplane");
@@ -54,9 +54,9 @@ public class Airplane extends JFrame implements ActionListener {
     }
 
     private void initUniverse() {
+
         //Create a Canvas3D using the preferred configuration
         Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
-
         canvas.setFocusable(true);
 
         canvas.addKeyListener(new KeyAdapter() {
@@ -117,7 +117,6 @@ public class Airplane extends JFrame implements ActionListener {
 
         //Add the branch into the Universe
         universe.addBranchGraph(createSceneGraph());
-
         viewingTransformGroup = universe.getViewingPlatform().getViewPlatformTransform();
     }
 
@@ -133,8 +132,19 @@ public class Airplane extends JFrame implements ActionListener {
 
         buildAirplane();
 
+        TransformGroup tg = new TransformGroup();
+        Transform3D t = new Transform3D();
+        t.setScale(new Vector3d(0.5f,0.5f,0.5f));
+        tg.setTransform(t);
+        tg.addChild(airplaneTransformGroup);
+
+//        Background background = new Background(new Color3f(new Color(84, 84, 84)));
+//        BoundingSphere sphere = new BoundingSphere(new Point3d(0,0,0), 100000);
+//        background.setApplicationBounds(sphere);
+//        objRoot.addChild(background);
+
         //Add the transform group to the BranchGroup
-        objRoot.addChild(airplaneTransformGroup);
+        objRoot.addChild(tg);
 
         addLights(objRoot);
 
@@ -142,7 +152,6 @@ public class Airplane extends JFrame implements ActionListener {
     }
 
     private void addLights(BranchGroup objRoot) {
-        BoundingSphere bounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 1000.0);
         Color3f light1Color = new Color3f(1.0f, 1f, 1f);
         Vector3f light1Direction = new Vector3f(4.0f, -7.0f, -12.0f);
         light1 = new DirectionalLight(light1Color, light1Direction);
@@ -178,61 +187,46 @@ public class Airplane extends JFrame implements ActionListener {
 
         // Rear Fuselage
 
-        Sphere rearFuselageSphere = new Sphere(
+        TransformGroup rearFuselageSphereTG = shapeTransform.setShape(new Sphere(
                 0.9f,
-                AppearanceUtils.getGreyAppearance()
-        );
-        Transform3D rearFuselageSphereT = new Transform3D();
-        rearFuselageSphereT.setTranslation(new Vector3f(0, 5f, -0.09f));
-        TransformGroup rearFuselageSphereTG = new TransformGroup();
-        rearFuselageSphereTG.setTransform(rearFuselageSphereT);
-        rearFuselageSphereTG.addChild(rearFuselageSphere);
+                primFlags,
+                60,
+                AppearanceUtils.getGreyAppearance()))
+                .setTranslation(0, 5f, -0.09f)
+                .getTransformGroup();
 
-        Cone rearFuselageCone = new Cone(
+        TransformGroup rearFuselageConeTG = shapeTransform.setShape(new Cone(
                 1,
                 3,
                 primFlags,
-                AppearanceUtils.getGreyAppearance()
-        );
-        Transform3D rearFuselageConeT = new Transform3D();
-        rearFuselageConeT.rotX(18 * Math.PI / 180.0);
-        rearFuselageConeT.setTranslation(new Vector3f(0, 6.5f, 0.5f));
-        TransformGroup rearFuselageConeTG = new TransformGroup();
-        rearFuselageConeTG.setTransform(rearFuselageConeT);
-        rearFuselageConeTG.addChild(rearFuselageCone);
-
+                AppearanceUtils.getGreyAppearance()))
+                .rotX(18)
+                .setTranslation(0, 6.5f, 0.5f)
+                .getTransformGroup();
 
         // Forward Fuselage
 
-        Sphere forwardFuselageSphere = new Sphere(
+        TransformGroup forwardFuselageSphereTG = shapeTransform.setShape(new Sphere(
                 1f,
                 primFlags,
                 60,
-                AppearanceUtils.getGreyAppearance()
-        );
-        Transform3D forwardFuselageSphereT = new Transform3D();
-        forwardFuselageSphereT.setTranslation(new Vector3f(0, -5f, -0.19f));
-        forwardFuselageSphereT.setScale(new Vector3d(0.9f, 2f, 0.8));
-        TransformGroup forwardFuselageSphereTG = new TransformGroup();
-        forwardFuselageSphereTG.setTransform(forwardFuselageSphereT);
-        forwardFuselageSphereTG.addChild(forwardFuselageSphere);
+                AppearanceUtils.getGreyAppearance()))
+                .setTranslation(0, -5f, -0.19f)
+                .setScale(0.9f, 2f, 0.8)
+                .getTransformGroup();
 
-        Cone forwardFuselageSphereCone = new Cone(
+        TransformGroup forwardFuselageSphereConeTG = shapeTransform.setShape(new Cone(
                 1,
                 1.5f,
                 primFlags,
                 AppearanceUtils.getAppearance(
-                        new Color(56, 74, 174), "resource\\images\\glass-texture.jpg")
-        );
-        Transform3D forwardFuselageSphereConeT = new Transform3D();
-        forwardFuselageSphereConeT.rotZ(Math.PI);
-        forwardFuselageSphereConeT.setTranslation(new Vector3f(0, -5.75f, 0));
-        TransformGroup forwardFuselageSphereConeTG = new TransformGroup();
-        forwardFuselageSphereConeTG.setTransform(forwardFuselageSphereConeT);
-        forwardFuselageSphereConeTG.addChild(forwardFuselageSphereCone);
+                        new Color(56, 74, 174),
+                        "resource\\images\\glass-texture.jpg")))
+                .rotZ(180)
+                .setTranslation(0, -5.75f, 0)
+                .getTransformGroup();
 
         // Tail Fin
-
 
         TransformGroup tailFinTG1 = shapeTransform.setShape(new Box(
                 0.07f,

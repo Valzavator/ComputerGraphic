@@ -6,8 +6,8 @@ public class Main {
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(() -> {
-            Airplane redCube = new Airplane();
-            redCube.setVisible(true);
+            Airplane airplane = new Airplane();
+            airplane.setVisible(true);
         });
     }
 }

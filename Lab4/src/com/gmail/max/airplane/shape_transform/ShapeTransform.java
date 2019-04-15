@@ -14,7 +14,7 @@ public class ShapeTransform {
     private TransformGroup transformGroup;
 
     private boolean isRotated;
-    private boolean isTranlated;
+    private boolean isTranslated;
 
     public ShapeTransform() {
         init();
@@ -22,7 +22,7 @@ public class ShapeTransform {
 
     public ShapeTransform setShape(Primitive shape) {
         if (shape == null) {
-            throw new NullPointerException("Shape can`t be null!");
+            throw new NullPointerException("Shape can`t be NULL!");
         }
         this.shape = shape;
         return this;
@@ -30,7 +30,7 @@ public class ShapeTransform {
 
     public ShapeTransform setTranslation(float x, float y, float z) {
         transform3D.setTranslation(new Vector3f(x, y, z));
-        isTranlated = true;
+        isTranslated = true;
         return this;
     }
 
@@ -68,7 +68,7 @@ public class ShapeTransform {
 
     public TransformGroup getTransformGroup() {
         if (shape == null) {
-            throw new IllegalStateException("Shape still not be generate!");
+            throw new IllegalStateException("The shape has not yet been generated!");
         }
         transformGroup.setTransform(transform3D);
         transformGroup.addChild(shape);
@@ -89,12 +89,12 @@ public class ShapeTransform {
         transformGroup = new TransformGroup();
         transform3D = new Transform3D();
         isRotated = false;
-        isTranlated = false;
+        isTranslated = false;
     }
 
     private void checkRotated() {
-        if (isTranlated) {
-            throw new IllegalStateException("Can`t rotate after translation!");
+        if (isTranslated) {
+            throw new IllegalStateException("The shape cannot be rotated after translation!");
         }
         if (isRotated) {
             throw new IllegalStateException("Shape has been rotated!");

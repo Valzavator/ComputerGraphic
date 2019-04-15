@@ -138,27 +138,27 @@ public class CastleBody {
         // завантажуємо текстуру
         TextureLoader loader = new TextureLoader("resource\\images\\metal.jpg", "LUMINANCE", new
                 Container());
-
-        Texture texture = loader.getTexture();
-        // задаємо властивості границі текстури
-        texture.setBoundaryModeS(Texture.WRAP);
-        texture.setBoundaryModeT(Texture.WRAP);
-        texture.setBoundaryColor(new Color4f(0.0f, 1.0f, 1.0f, 0.0f));
-
-        // встановлюємо атрибути текстури
-        TextureAttributes texAttr = new TextureAttributes();
-        texAttr.setTextureMode(TextureAttributes.MODULATE); // може бути REPLACE, BLEND або DECAL замість MODULATE
-
+//
+//        Texture texture = loader.getTexture();
+//        // задаємо властивості границі текстури
+//        texture.setBoundaryModeS(Texture.WRAP);
+//        texture.setBoundaryModeT(Texture.WRAP);
+//        texture.setBoundaryColor(new Color4f(0.0f, 1.0f, 1.0f, 0.0f));
+//
+//        // встановлюємо атрибути текстури
+//        TextureAttributes texAttr = new TextureAttributes();
+//        texAttr.setTextureMode(TextureAttributes.MODULATE); // може бути REPLACE, BLEND або DECAL замість MODULATE
+//
         Appearance ap = new Appearance();
-        ap.setTexture(texture);
-        ap.setTextureAttributes(texAttr);
-
-        Color3f emissive = new Color3f(new Color(0,0, 0));
-        Color3f ambient = new Color3f(new Color(100,38, 38));
-        Color3f diffuse = new Color3f(new Color(178,38, 38));
-        Color3f specular = new Color3f(new Color(0,0, 0));
-        // ambient, emissive, diffuse, specular, 1.0f
-        ap.setMaterial(new Material(ambient, emissive, diffuse, specular, 1.0f));
+//        ap.setTexture(texture);
+//        ap.setTextureAttributes(texAttr);
+//
+//        Color3f emissive = new Color3f(new Color(0,0, 0));
+//        Color3f ambient = new Color3f(new Color(100,38, 38));
+//        Color3f diffuse = new Color3f(new Color(178,38, 38));
+//        Color3f specular = new Color3f(new Color(0,0, 0));
+//        // ambient, emissive, diffuse, specular, 1.0f
+//        ap.setMaterial(new Material(ambient, emissive, diffuse, specular, 1.0f));
         return ap;
     }
 
@@ -176,52 +176,52 @@ public class CastleBody {
         // завантажуємо текстуру
         TextureLoader loader = new TextureLoader("resource\\images\\Koala.jpg", "LUMINANCE", new
                 Container());
-
-        Texture texture = loader.getTexture();
-        // задаємо властивості границі текстури
-        texture.setBoundaryModeS(Texture.WRAP);
-        texture.setBoundaryModeT(Texture.WRAP);
-        texture.setBoundaryColor(new Color4f(0.0f, 1.0f, 1.0f, 0.0f));
-
-        // встановлюємо атрибути текстури
-        TextureAttributes texAttr = new TextureAttributes();
-        texAttr.setTextureMode(TextureAttributes.MODULATE); // може бути REPLACE, BLEND або DECAL замість MODULATE
-
+//
+//        Texture texture = loader.getTexture();
+//        // задаємо властивості границі текстури
+//        texture.setBoundaryModeS(Texture.WRAP);
+//        texture.setBoundaryModeT(Texture.WRAP);
+//        texture.setBoundaryColor(new Color4f(0.0f, 1.0f, 1.0f, 0.0f));
+//
+//        // встановлюємо атрибути текстури
+//        TextureAttributes texAttr = new TextureAttributes();
+//        texAttr.setTextureMode(TextureAttributes.MODULATE); // може бути REPLACE, BLEND або DECAL замість MODULATE
+//
         Appearance ap = new Appearance();
-        ap.setTexture(texture);
-        ap.setTextureAttributes(texAttr);
-
-        Color3f emissive = new Color3f(new Color(0,0, 0));
-        Color3f ambient = new Color3f(new Color(100,38, 38));
-        Color3f diffuse = new Color3f(new Color(100,38, 38));
-        Color3f specular = new Color3f(new Color(0,0, 0));
-        ap.setMaterial(new Material(ambient, emissive, diffuse, specular, 1.0f));
+//        ap.setTexture(texture);
+//        ap.setTextureAttributes(texAttr);
+//
+//        Color3f emissive = new Color3f(new Color(0,0, 0));
+//        Color3f ambient = new Color3f(new Color(100,38, 38));
+//        Color3f diffuse = new Color3f(new Color(100,38, 38));
+//        Color3f specular = new Color3f(new Color(0,0, 0));
+//        ap.setMaterial(new Material(ambient, emissive, diffuse, specular, 1.0f));
         return ap;
     }
 
     private static Appearance getCylTowersAppearence() {
         // завантажуємо текстуру
-        TextureLoader loader = new TextureLoader("resource\\images\\lines.png", "LUMINANCE", new Container());
-        Texture texture = loader.getTexture();
-
-        // задаємо властивості границі текстури
-        texture.setBoundaryModeS(Texture.WRAP);
-        texture.setBoundaryModeT(Texture.WRAP);
-        texture.setBoundaryColor(new Color4f(0.0f, 1.0f, 1.0f, 0.0f));
-
-        // встановлюємо атрибути текстури
-        TextureAttributes texAttr = new TextureAttributes();
-        texAttr.setTextureMode(TextureAttributes.MODULATE); // може бути REPLACE, BLEND або DECAL замість MODULATE
-
+//        TextureLoader loader = new TextureLoader("resource\\images\\lines.png", "LUMINANCE", new Container());
+//        Texture texture = loader.getTexture();
+//
+//        // задаємо властивості границі текстури
+//        texture.setBoundaryModeS(Texture.WRAP);
+//        texture.setBoundaryModeT(Texture.WRAP);
+//        texture.setBoundaryColor(new Color4f(0.0f, 1.0f, 1.0f, 0.0f));
+//
+//        // встановлюємо атрибути текстури
+//        TextureAttributes texAttr = new TextureAttributes();
+//        texAttr.setTextureMode(TextureAttributes.MODULATE); // може бути REPLACE, BLEND або DECAL замість MODULATE
+//
         Appearance ap = new Appearance();
-        ap.setTexture(texture);
-        ap.setTextureAttributes(texAttr);
-
-        Color3f emissive = new Color3f(new Color(0,0, 0));
-        Color3f ambient = new Color3f(new Color(100,38, 38));
-        Color3f diffuse = new Color3f(new Color(100,38, 38));
-        Color3f specular = new Color3f(new Color(0,0, 0));
-        ap.setMaterial(new Material(ambient, emissive, diffuse, specular, 1.0f));
+//        ap.setTexture(texture);
+//        ap.setTextureAttributes(texAttr);
+//
+//        Color3f emissive = new Color3f(new Color(0,0, 0));
+//        Color3f ambient = new Color3f(new Color(100,38, 38));
+//        Color3f diffuse = new Color3f(new Color(100,38, 38));
+//        Color3f specular = new Color3f(new Color(0,0, 0));
+//        ap.setMaterial(new Material(ambient, emissive, diffuse, specular, 1.0f));
         return ap;
     }
 }

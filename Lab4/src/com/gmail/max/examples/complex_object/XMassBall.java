@@ -27,19 +27,19 @@ public class XMassBall {
 		Color3f specular = new Color3f(0.0f, 0.0f, 0.0f);
 		ap.setMaterial(new Material(ambient, emissive, diffuse, specular, 1.0f));
 
-		if (picture != "") {
-			// завантажуємо текстуру
-			TextureLoader loader = new TextureLoader(picture, "LUMINANCE", new Container());
-			Texture texture = loader.getTexture();
-			// задаємо властивості границі
-			texture.setBoundaryModeS(Texture.WRAP);
-			texture.setBoundaryModeT(Texture.WRAP);
-			texture.setBoundaryColor(new Color4f(0.0f, 1.0f, 1.0f, 0.0f));
-			TextureAttributes texAttr = new TextureAttributes();
-			texAttr.setTextureMode(TextureAttributes.MODULATE);
-			ap.setTexture(texture);
-			ap.setTextureAttributes(texAttr);
-		}
+//		if (picture != "") {
+//			// завантажуємо текстуру
+//			TextureLoader loader = new TextureLoader(picture, "LUMINANCE", new Container());
+//			Texture texture = loader.getTexture();
+//			// задаємо властивості границі
+//			texture.setBoundaryModeS(Texture.WRAP);
+//			texture.setBoundaryModeT(Texture.WRAP);
+//			texture.setBoundaryColor(new Color4f(0.0f, 1.0f, 1.0f, 0.0f));
+//			TextureAttributes texAttr = new TextureAttributes();
+//			texAttr.setTextureMode(TextureAttributes.MODULATE);
+//			ap.setTexture(texture);
+//			ap.setTextureAttributes(texAttr);
+//		}
 		return ap;
 	}
 }
