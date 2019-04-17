@@ -152,16 +152,16 @@ public class Airplane extends JFrame implements ActionListener {
     }
 
     private void addLights(BranchGroup objRoot) {
-        Color3f light1Color = new Color3f(1.0f, 1f, 1f);
-        Vector3f light1Direction = new Vector3f(4.0f, -7.0f, -12.0f);
-        light1 = new DirectionalLight(light1Color, light1Direction);
+        Color3f lightColor1 = new Color3f(1.0f, 1f, 1f);
+        Vector3f lightDirection1 = new Vector3f(4.0f, -7.0f, -12.0f);
+        light1 = new DirectionalLight(lightColor1, lightDirection1);
         light1.setCapability(DirectionalLight.ALLOW_INFLUENCING_BOUNDS_WRITE);
         light1.setInfluencingBounds(bounds);
         objRoot.addChild(light1);
 
-        Color3f light1Color2 = new Color3f(1f, 1f, 1f);
-        Vector3f light1Direction2 = new Vector3f(4.0f, 7.0f, 12.0f);
-        light2 = new DirectionalLight(light1Color2, light1Direction2);
+        Color3f lightColor2 = new Color3f(1f, 1f, 1f);
+        Vector3f lightDirection2 = new Vector3f(4.0f, 7.0f, 12.0f);
+        light2 = new DirectionalLight(lightColor2, lightDirection2);
         light2.setCapability(DirectionalLight.ALLOW_INFLUENCING_BOUNDS_WRITE);
         light2.setInfluencingBounds(bounds);
         objRoot.addChild(light2);
