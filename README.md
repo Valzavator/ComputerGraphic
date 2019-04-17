@@ -1,1 +1,2 @@
-# MAOKG - Mathematical and algorithmic basics of computer graphics
+# Математичні та алгоритмічні основи компютерної графіки
+Лабораторні роботи **варіант № 20**
