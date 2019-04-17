@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7cef2459-dbad-43f8-8833-a6ee8639c818" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4/resource/images/Koala.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4/resource/images/lines.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4/resource/images/metal.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4/resource/images/pencilbody.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/castle/Castle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/castle/CastleBody.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/ice_сream/IceCream.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/ice_сream/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab4/.idea/libraries/Java3D.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/.idea/libraries/Java3D.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab4/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab4/Lab4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/Lab4.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/appearence_sphere/AppearenceSphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/appearence_sphere/AppearenceSphere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/image_example/1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/image_example/ImageExample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/red_cube/RedCube.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab4/src/com/gmail/max/examples/red_cube/RedCube.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab3/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab3/lab3.gif" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/gmail/app/animation/TreeAnimation.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
-              <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+              <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#914#1422#0" expanded="true" />
@@ -84,13 +71,6 @@
         <option value="$PROJECT_DIR$/src/com/gmail/app/TreeAnimation.java" />
         <option value="$PROJECT_DIR$/src/com/gmail/app/main/Main.java" />
         <option value="$PROJECT_DIR$/src/com/gmail/app/animation/TreeAnimation.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/uiDesigner.xml" />
       </list>
     </option>
   </component>
@@ -151,12 +131,17 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Lab1" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Valzavator\IdeaProjects\MAOKG\Lab2" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -227,6 +212,7 @@
       <workItem from="1552904758530" duration="701000" />
       <workItem from="1552916880055" duration="125000" />
       <workItem from="1554910126831" duration="1226000" />
+      <workItem from="1555520638313" duration="536000" />
     </task>
     <task id="LOCAL-00001" summary="lab 2 done">
       <created>1552510023602</created>
@@ -253,23 +239,21 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26193000" />
+    <option name="totallyTimeSpent" value="26729000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29914072" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30343717" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="CheckStyle" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32991454" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32887402" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -283,6 +267,7 @@
       <window_info anchor="bottom" id="ANTLR Preview" order="13" />
       <window_info anchor="bottom" id="Messages" order="14" weight="0.32998884" />
       <window_info anchor="bottom" id="Duplicates" order="15" weight="0.32998884" />
+      <window_info anchor="bottom" id="CheckStyle" order="16" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -374,7 +359,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/gmail/app/animation/TreeAnimation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
-          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#914#1422#0" expanded="true" />
