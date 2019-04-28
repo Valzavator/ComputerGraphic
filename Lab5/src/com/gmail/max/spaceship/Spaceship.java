@@ -105,7 +105,7 @@ public class Spaceship extends JFrame {
 
         transform3D.setTranslation(new Vector3d(1, 0,0));
 
-        TransformGroup group = getModelGroup("resource/spaceship2.obj");
+        TransformGroup group = getModelGroup("resource/spaceship.obj");
         group.setTransform(transform3D);
 
         return group;
