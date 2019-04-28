@@ -17,13 +17,14 @@ import java.util.Map;
 
 public class Spaceship extends JFrame {
 
-    private static Canvas3D canvas;
-    private static SimpleUniverse universe;
-    private static BranchGroup root;
+    private Canvas3D canvas;
+    private SimpleUniverse universe;
+    private BranchGroup root;
 
-    private static TransformGroup spaceship;
+    private TransformGroup space = new TransformGroup();
+    private TransformGroup spaceship;
 
-    private static Map<String, Shape3D> shapeMap;
+    private Map<String, Shape3D> shapeMap;
 
     public Spaceship() throws IOException {
 
@@ -32,6 +33,8 @@ public class Spaceship extends JFrame {
         configureUniverse();
 
         root = new BranchGroup();
+        root.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
+
 
         addImageBackground("resource/image/space-texture.jpg");
         addLightToUniverse();
@@ -39,11 +42,13 @@ public class Spaceship extends JFrame {
         ChangeViewAngle();
 
         spaceship = getSpaceshipGroup();
-        root.addChild(spaceship);
+        space.addChild(spaceship);
+
+        root.addChild(space);
 
         addAppearance();
 
-        SpaceshipAnimation spaceshipAnimation = new SpaceshipAnimation(spaceship);
+        SpaceshipAnimation spaceshipAnimation = new SpaceshipAnimation(this);
         canvas.addKeyListener(spaceshipAnimation);
 
         root.compile();
@@ -60,7 +65,8 @@ public class Spaceship extends JFrame {
     private void configureCanvas() {
         canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         canvas.setDoubleBufferEnable(true);
-        getContentPane().add(canvas, BorderLayout.CENTER);
+        canvas.setFocusable(true);
+        add(canvas, BorderLayout.CENTER);
     }
 
     private void configureUniverse() {
@@ -83,7 +89,7 @@ public class Spaceship extends JFrame {
 
         DirectionalLight directionalLight = new DirectionalLight(
                 new Color3f(new Color(255, 255, 255)),
-                new Vector3f(-1, -1, -1));
+                new Vector3f(0, -0.5f, -0.5f));
         directionalLight.setInfluencingBounds(bounds);
 
         AmbientLight ambientLight = new AmbientLight(
@@ -99,7 +105,7 @@ public class Spaceship extends JFrame {
 
         transform3D.setTranslation(new Vector3d(1, 0,0));
 
-        TransformGroup group = getModelGroup("resource/spaceship0.obj");
+        TransformGroup group = getModelGroup("resource/spaceship2.obj");
         group.setTransform(transform3D);
 
         return group;
@@ -125,6 +131,8 @@ public class Spaceship extends JFrame {
         return group;
     }
 
+
+
     private void printModelElementsList(Map<String, Shape3D> shapeMap) {
         for (String name : shapeMap.keySet()) {
             System.out.printf("Name: %s\n", name);
@@ -133,11 +141,10 @@ public class Spaceship extends JFrame {
 
 
     private void addAppearance() {
-//        bodyAppearance.setTexture(getTexture("resource/image/falcon.jpg"));
+        Appearance bodyAppearance = new Appearance();
+//        bodyAppearance.setTexture(getTexture("resource/image/hull.jpg"));
 //        TextureAttributes texAttr = new TextureAttributes();
 //        texAttr.setTextureMode(TextureAttributes.MODULATE);
-//        bodyAppearance.setTextureAttributes(texAttr);
-        Appearance bodyAppearance = new Appearance();
         bodyAppearance.setMaterial(getMaterial(
                 Color.BLACK,
                 new Color(98, 98, 98)));
@@ -158,7 +165,7 @@ public class Spaceship extends JFrame {
         Appearance glassAppearance = new Appearance();
         glassAppearance.setMaterial(getMaterial(
                 Color.BLACK,
-                new Color(88, 85, 224)));
+                new Color(53, 61, 224)));
         shapeMap.get("glass").setAppearance(glassAppearance);
 
         Appearance engineAppearance = new Appearance();
@@ -194,9 +201,17 @@ public class Spaceship extends JFrame {
         ViewingPlatform vp = universe.getViewingPlatform();
         TransformGroup vpGroup = vp.getMultiTransformGroup().getTransformGroup(0);
         Transform3D vpTranslation = new Transform3D();
-        Vector3f translationVector = new Vector3f(0, 0, 6);
-        vpTranslation.setTranslation(translationVector);
+        vpTranslation.setTranslation(new Vector3f(0, 0, 6));
         vpGroup.setTransform(vpTranslation);
+
+
+//        Point3d eye = new Point3d(0, -5, 6); // spectator's eye
+//        Point3d center = new Point3d(.0f, .0f, .0f); // sight target
+//        Vector3d up = new Vector3d(.0f, .0f, 1.0f);
+//
+//        vpTranslation.lookAt(eye, center, up);
+//        vpTranslation.invert();
+//        vpGroup.setTransform(vpTranslation);
     }
 
     public static Scene getSceneFromFile(String location) throws IOException {
@@ -205,10 +220,16 @@ public class Spaceship extends JFrame {
         return file.load(new FileReader(location));
     }
 
+    public void generateShot(float xLoc, float yLoc, float zLoc) {
+        root.addChild(new Shot(xLoc, yLoc, zLoc));
+    }
+
+    public TransformGroup getSpaceshipTransformGroup() {
+        return spaceship;
+    }
 //    //Not always works
 //    public static Scene getSceneFromLwoFile(String location) throws IOException {
 //        Lw3dLoader loader = new Lw3dLoader();
 //        return loader.load(location);
 //    }
-
 }

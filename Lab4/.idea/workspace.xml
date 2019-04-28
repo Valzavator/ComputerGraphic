@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f54ecb5c-dfc1-4a04-9a55-8baa300e4733" name="Default Changelist" comment="" />
+    <list default="true" id="f54ecb5c-dfc1-4a04-9a55-8baa300e4733" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Lab5/resource/image/hull.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/src/com/gmail/max/spaceship/AppearanceUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab5/Lab5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab5/Lab5.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab5/src/com/gmail/max/spaceship/Spaceship.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab5/src/com/gmail/max/spaceship/Spaceship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab5/src/com/gmail/max/spaceship/SpaceshipAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab5/src/com/gmail/max/spaceship/SpaceshipAnimation.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,23 +27,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/gmail/max/airplane/model/Airplane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="211" column="19" lean-forward="true" selection-start-line="211" selection-start-column="19" selection-end-line="211" selection-end-column="19" />
+            <state relative-caret-position="222">
+              <caret line="448" column="48" lean-forward="true" selection-start-line="448" selection-start-column="48" selection-end-line="448" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1555514027791" expanded="true" signature="1561:1675" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/gmail/max/airplane/utils/AppearanceUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="45" column="46" lean-forward="true" selection-start-line="45" selection-start-column="3" selection-end-line="45" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -146,7 +140,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Lab3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -282,6 +276,7 @@
       <workItem from="1555358444881" duration="6372000" />
       <workItem from="1555510012451" duration="1043000" />
       <workItem from="1555513306189" duration="4529000" />
+      <workItem from="1556457921130" duration="3107000" />
     </task>
     <task id="LOCAL-00001" summary="lab 4 init">
       <created>1554670449505</created>
@@ -350,7 +345,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83605000" />
+    <option name="totallyTimeSpent" value="86712000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -363,8 +358,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19342507" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19724771" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -791,7 +787,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/gmail/max/airplane/utils/AppearanceUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="45" column="46" lean-forward="true" selection-start-line="45" selection-start-column="3" selection-end-line="45" selection-end-column="46" />
+          <caret line="45" column="46" selection-start-line="45" selection-start-column="3" selection-end-line="45" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -800,8 +796,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/gmail/max/airplane/model/Airplane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="211" column="19" lean-forward="true" selection-start-line="211" selection-start-column="19" selection-end-line="211" selection-end-column="19" />
+        <state relative-caret-position="222">
+          <caret line="448" column="48" lean-forward="true" selection-start-line="448" selection-start-column="48" selection-end-line="448" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
             <marker date="1555514027791" expanded="true" signature="1561:1675" ph="..." />

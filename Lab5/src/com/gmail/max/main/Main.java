@@ -1,8 +1,6 @@
 package com.gmail.max.main;
 
-import com.gmail.max.examlpes.plane.AnimationPlane;
 import com.gmail.max.spaceship.Spaceship;
-import com.gmail.max.spaceship.SpaceshipAnimation;
 
 import java.io.IOException;
 
