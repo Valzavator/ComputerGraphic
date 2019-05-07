@@ -227,6 +227,8 @@ public class Spaceship extends JFrame {
     public TransformGroup getSpaceshipTransformGroup() {
         return spaceship;
     }
+
+
 //    //Not always works
 //    public static Scene getSceneFromLwoFile(String location) throws IOException {
 //        Lw3dLoader loader = new Lw3dLoader();
