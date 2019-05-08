@@ -39,6 +39,7 @@ public class Warrior extends JFrame {
         setVisible(true);
     }
 
+    @SuppressWarnings("Duplicates")
     public void createSceneGraph(SimpleUniverse su) {
 
         ObjectFile f = new ObjectFile(ObjectFile.RESIZE);
@@ -99,7 +100,7 @@ public class Warrior extends JFrame {
         axeTG.addChild(axe.cloneTree());
 
         BoundingSphere bounds = new BoundingSphere(new Point3d(0, 0, 0), Double.MAX_VALUE);
-
+//
 //        var tCrawl = new Transform3D();
 //        var tCrawl1 = new Transform3D();
 //        tCrawl.rotY(-90D);
@@ -127,15 +128,15 @@ public class Warrior extends JFrame {
 //        posICrawl.setSchedulingBounds(bs);
 //        posICrawl1.setSchedulingBounds(bs);
 //        sceneGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-//        sceneGroup.addChild(posICrawl);
-//
-//
+//        sceneGroup.addChild(posICrawl1);
+
+
         int timeStart = 1000;
-        int timeRotationHour = 1000;
+        int timeRotationHour = 3000;
 
         Transform3D headRotationAxis = new Transform3D();
-//        headRotationAxis.rotY(0);
         headRotationAxis.set(new Vector3d(-0.17, 0, -0.05));
+//        headRotationAxis.rotY(Math.PI/2);
         headRotationAxis.setRotation(new AxisAngle4d(0, -0.1, 0, Math.PI/2));
 
 
@@ -145,65 +146,105 @@ public class Warrior extends JFrame {
                 headRotationAxis, (float) -Math.PI / 4 , (float) Math.PI / 4);
         headRotation.setSchedulingBounds(bounds);
 
+        Transform3D leftHandTransform = new Transform3D();
+
+        Transform3D leftHandXRot = new Transform3D();
+        leftHandXRot.setRotation(new AxisAngle4d(-0.1, 0, 0, 50* Math.PI / 180));
+        leftHandTransform.mul(leftHandXRot, leftHandTransform);
+
+        Transform3D leftHandYRot = new Transform3D();
+        leftHandYRot.setRotation(new AxisAngle4d(0, -0.1, 0, 50* Math.PI / 180));
+        leftHandTransform.mul(leftHandYRot, leftHandTransform);
+
+        Transform3D leftHandTranslate = new Transform3D();
+        leftHandTranslate.set(new Vector3d(-0.13, 0.12, 0.15));
+        leftHandTransform.mul(leftHandTranslate, leftHandTransform);
+
+        leftHandTG.setTransform(leftHandTransform);
+
+        TransformGroup transformedLeftHandTG = new TransformGroup();
+        transformedLeftHandTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        transformedLeftHandTG.addChild(leftHandTG);
 
         Transform3D leftHandRotationAxis = new Transform3D();
-//        leftHandRotationAxis.rotZ(Math.PI / 2);
         leftHandRotationAxis.set(new Vector3d(0, 0.23, -0.05));
         leftHandRotationAxis.setRotation(new AxisAngle4d(0, 0, -0.1, Math.PI/2));
 
         Alpha leftHandRotationAlpha = new Alpha(-1, Alpha.INCREASING_ENABLE | Alpha.DECREASING_ENABLE, timeStart, 0,
                 timeRotationHour, 0, 0, timeRotationHour, 0, 0);
-        RotationInterpolator leftHandRotation = new RotationInterpolator(leftHandRotationAlpha, leftHandTG,
+        RotationInterpolator leftHandRotation = new RotationInterpolator(leftHandRotationAlpha, transformedLeftHandTG,
                 leftHandRotationAxis, (float)  -Math.PI , 0.0f);
         leftHandRotation.setSchedulingBounds(bounds);
 
+        Transform3D rightHandTransform = new Transform3D();
+
+        Transform3D rightHandXRot = new Transform3D();
+        rightHandXRot.setRotation(new AxisAngle4d(-0.1, 0, 0, 50* Math.PI / 180));
+        rightHandTransform.mul(rightHandXRot, rightHandTransform);
+
+        Transform3D rightHandYRot = new Transform3D();
+        rightHandYRot.setRotation(new AxisAngle4d(0, -0.1, 0, -50* Math.PI / 180));
+        rightHandTransform.mul(rightHandYRot, rightHandTransform);
+
+        Transform3D rightHandTranslate = new Transform3D();
+        rightHandTranslate.set(new Vector3d(0.02, 0.12, -0.12));
+        rightHandTransform.mul(rightHandTranslate, rightHandTransform);
+
+        rightHandTG.setTransform(rightHandTransform);
+
+        TransformGroup transformedRightHandTG = new TransformGroup();
+        transformedRightHandTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        transformedRightHandTG.addChild(rightHandTG);
 
         Transform3D rightHandRotationAxis = new Transform3D();
-//        leftHandRotationAxis.rotZ(Math.PI / 2);
         rightHandRotationAxis.set(new Vector3d(0, 0.23, -0.05));
         rightHandRotationAxis.setRotation(new AxisAngle4d(0, 0, -0.1, Math.PI/2));
 
         Alpha rightHandRotationAlpha = new Alpha(-1, Alpha.INCREASING_ENABLE | Alpha.DECREASING_ENABLE, timeStart, 0,
                 timeRotationHour, 0, 0, timeRotationHour, 0, 0);
-        RotationInterpolator rightHandRotation = new RotationInterpolator(rightHandRotationAlpha, rightHandTG,
+        RotationInterpolator rightHandRotation = new RotationInterpolator(rightHandRotationAlpha, transformedRightHandTG,
                 rightHandRotationAxis, (float)  -Math.PI , 0.0f);
         rightHandRotation.setSchedulingBounds(bounds);
+
+        Transform3D axeTransform = new Transform3D();
+
+        Transform3D rotate1 = new Transform3D();
+        rotate1.setRotation(new AxisAngle4d(-0.1, 0, 0, 50* Math.PI / 180));
+        rightHandTransform.mul(rotate1, rightHandTransform);
+
+//        Transform3D rotate2 = new Transform3D();
+//        rotate2.setRotation(new AxisAngle4d(0, -0.1, 0, -50* Math.PI / 180));
+//        rightHandTransform.mul(rotate2, rightHandTransform);
 //
+//        Transform3D translate1 = new Transform3D();
+//        translate1.set(new Vector3d(0.02, 0.12, -0.12));
+//        rightHandTransform.mul(translate1, rightHandTransform);
+
+        axeTG.setTransform(axeTransform);
+
+        TransformGroup transformedAxeTG = new TransformGroup();
+        transformedAxeTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        transformedAxeTG.addChild(axeTG);
+
+//        Transform3D rightHandRotationAxis = new Transform3D();
+//        rightHandRotationAxis.set(new Vector3d(0, 0.23, -0.05));
+//        rightHandRotationAxis.setRotation(new AxisAngle4d(0, 0, -0.1, Math.PI/2));
 //
-//        var rightHandRotationAxis = new Transform3D();
-//        rightHandRotationAxis.rotZ(Math.PI / 2);
-//        var rightHandRotation = new RotationInterpolator(leftLegRotationAlpha, rightHandGr,
-//                rightHandRotationAxis, (float) Math.PI / 4, 0.0f);
-//        rightHandRotation.setSchedulingBounds(bounds);
-//
-//
-//        var rightLegRotationAxis = new Transform3D();
-//        rightLegRotationAxis.rotZ(Math.PI / 2);
-//        var rightLegRotationAlpha = new Alpha(-1, Alpha.INCREASING_ENABLE | Alpha.DECREASING_ENABLE, 0, 0,
+//        Alpha rightHandRotationAlpha = new Alpha(-1, Alpha.INCREASING_ENABLE | Alpha.DECREASING_ENABLE, timeStart, 0,
 //                timeRotationHour, 0, 0, timeRotationHour, 0, 0);
-//        var rightLegRotation = new RotationInterpolator(rightLegRotationAlpha, rightLegGr,
-//                rightLegRotationAxis, (float) Math.PI / 4, 0.0f);
-//        rightLegRotation.setSchedulingBounds(bounds);
-//
-//        var leftHandRotationAxis = new Transform3D();
-//        leftHandRotationAxis.rotZ(Math.PI / 2);
-//        var leftHandRotation = new RotationInterpolator(rightLegRotationAlpha, leftHandGr,
-//                leftHandRotationAxis, (float) Math.PI / 4, 0.0f);
-//        leftHandRotation.setSchedulingBounds(bounds);
-
-
+//        RotationInterpolator rightHandRotation = new RotationInterpolator(rightHandRotationAlpha, transformedRightHandTG,
+//                rightHandRotationAxis, (float)  -Math.PI , 0.0f);
+//        rightHandRotation.setSchedulingBounds(bounds);
 
         headTG.addChild(headRotation);
-        leftHandTG.addChild(leftHandRotation);
-        rightHandTG.addChild(rightHandRotation);
-//        leftHandGr.addChild(leftHandRotation);
-//        rightHandGr.addChild(rightHandRotation);
+        transformedLeftHandTG.addChild(leftHandRotation);
+        transformedRightHandTG.addChild(rightHandRotation);
 
         sceneGroup.addChild(headTG);
         sceneGroup.addChild(bodyTG);
-        sceneGroup.addChild(leftHandTG);
-        sceneGroup.addChild(rightHandTG);
-//        sceneGroup.addChild(axeTG);
+        sceneGroup.addChild(transformedLeftHandTG);
+        sceneGroup.addChild(transformedRightHandTG);
+        sceneGroup.addChild(transformedAxeTG);
 
         tgWarrior.addChild(sceneGroup);
 
