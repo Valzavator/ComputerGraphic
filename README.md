@@ -17,8 +17,10 @@
 
 - [**Lab №5**](https://github.com/Valzavator/MAOKG/tree/master/Lab5)
 
-
+![Screenshots](https://github.com/Valzavator/ComputerGraphic/blob/master/Lab5/lab5.PNG)
 
 - [**Lab №6**](https://github.com/Valzavator/MAOKG/tree/master/Lab6)
+
+![gif](https://github.com/Valzavator/ComputerGraphic/blob/master/Lab6/lab6.gif)
 
 
